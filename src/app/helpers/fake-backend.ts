@@ -17,7 +17,7 @@ export let fakeBackendProvider = {
 
                     if(params.username === testUser.username && params.password === testUser.password){
                         connection.mockRespond(new Response(
-                            new ResponseOptions({ status: 200, body: { token: 'fake-jsw-token'}})
+                            new ResponseOptions({ status: 200, body: { token: 'fake-jwt-token'}})
                         ));
                     }else{
                         connection.mockRespond( new Response(
@@ -25,10 +25,11 @@ export let fakeBackendProvider = {
                         ));
                     }
                 }
-
+                
                 if (connection.request.url.endsWith('/api/users') &&
                 connection.request.method === RequestMethod.Get){
-                    if(connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token'){
+                    
+                    if(connection.request.headers.get('authorization') === 'Bearer fake-jwt-token'){
                         connection.mockRespond(new Response(
                             new ResponseOptions({ status: 200, body: [testUser]})
                         ));
