@@ -33,10 +33,10 @@ import { HomeComponent } from './home/home.component';
     AuthenticationService,
     UserService,
 
-    //fake backend\
-    fakeBackendProvider,
-    MockBackend,
-    BaseRequestOptions
+    // //fake backend\
+    // fakeBackendProvider,
+    // MockBackend,
+    // BaseRequestOptions
   ],
   bootstrap: [AppComponent]
 })
