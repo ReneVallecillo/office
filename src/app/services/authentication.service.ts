@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response} from '@angular/http';
+import { Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs'
+import { tokenNotExpired } from 'angular2-jwt';
+
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -16,12 +18,9 @@ export class AuthenticationService {
     login(username,password): Observable<boolean> {
         return this.http.post(this.domain + '/api/v1/login', JSON.stringify(
             {username: username, password: password })).map((response:Response) => {
-                let token = response.json() && response.json().token;
-                if (token){
-                    this.token = token;
-                    localStorage.setItem('currentUser', JSON.stringify(
-                        {username: username, token: token}
-                    ));
+                let user = response.json();
+                if (user && user.token){
+                    localStorage.setItem('currentUser', JSON.stringify(user))
                     return true;
                 }else{
                     return false;
@@ -34,4 +33,13 @@ export class AuthenticationService {
         this.token = null;
         localStorage.removeItem('currentUser');
     }
+
+    jwt(): RequestOptions{
+         // create authorization header with jwt token
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.token) {
+            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+            return new RequestOptions({ headers: headers });
+        }
+    }
 }
