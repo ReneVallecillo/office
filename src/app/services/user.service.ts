@@ -8,18 +8,17 @@ import { User } from '../models/user';
 
 @Injectable()
 export class UserService {
-    private token:string
 
+    private domain:string ='http://localhost:8080'
     constructor(
         private http:Http,
         private authService: AuthenticationService
     ) { }
 
     getUsers(): Observable<User[]>{
-        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token})
-        let options = new RequestOptions( { headers: headers })
+        let headers = this.authService.jwt() 
 
-        return this.http.get('/api/users', options)
+        return this.http.get(this.domain + '/api/v1/users', headers)
             .map((response:Response) => response.json());
     }
 }

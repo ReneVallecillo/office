@@ -7,12 +7,9 @@ import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthenticationService {
-    public token:string;
     private domain:string = "http://localhost:8080";
-
     constructor(private http:Http) { 
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.token = currentUser && currentUser.token;
+        
     }
 
     login(username,password): Observable<boolean> {
@@ -30,16 +27,18 @@ export class AuthenticationService {
 
     logout(): void {
         // clear token remove user from local storage to log user out
-        this.token = null;
         localStorage.removeItem('currentUser');
     }
 
     jwt(): RequestOptions{
          // create authorization header with jwt token
+                 console.log("aca");
+
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(currentUser);
         if (currentUser && currentUser.token) {
             let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
             return new RequestOptions({ headers: headers });
         }
     }
-}
+}   
