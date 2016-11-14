@@ -9,13 +9,25 @@ import {UserService} from '../services/user.service'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  currentUser: User;
   users: User[] = []
-  constructor(private UserService:UserService) { }
+  constructor(private UserService:UserService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+   }
 
   ngOnInit() {
-    this.UserService.getUsers()
-      .subscribe(users => {
-        this.users = users;
-      })
+    this.loadAllUsers();
+  }
+
+  private loadAllUsers(){
+    this.UserService.getAll().subscribe(
+      users => { this.users = users.content; console.log(users); }
+    )
+  }
+
+  private deleteUser(id) {
+    this.UserService.delete(id).subscribe(
+      () => { this.loadAllUsers() }
+    )
   }
 }

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs'
-import { tokenNotExpired } from 'angular2-jwt';
+
+import {SharedService} from './shared.service'
+
 
 import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthenticationService {
+
     private domain:string = "http://localhost:8080";
     constructor(private http:Http) { 
-        
+
     }
 
     login(username,password): Observable<boolean> {
@@ -30,6 +33,7 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
     }
 
+
     jwt(): RequestOptions{
          // create authorization header with jwt token
                  console.log("aca");
@@ -42,3 +46,4 @@ export class AuthenticationService {
         }
     }
 }   
+
