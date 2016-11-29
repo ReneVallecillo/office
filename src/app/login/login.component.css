@@ -1,0 +1,15 @@
+.login-card {
+  width: 420px;
+  margin-top: 25px;
+  justify-content: center;
+}
+
+.login-full-width {
+  width: 100%;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -17,6 +17,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import {ClientsComponent, ClientDetailComponent} from './clients/';
 import {AboutComponent} from './about/about.component';
+import { MaterialModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {AboutComponent} from './about/about.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    MaterialModule.forRoot()
   ],
   providers: [
     AuthGuard,

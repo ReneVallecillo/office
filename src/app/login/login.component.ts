@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loading = false;
 
   constructor(
-    private router:Router,
+    private router: Router,
     private authService: AuthenticationService,
     private alertService: AlertService
   ) { }
@@ -29,11 +29,10 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.login(this.model.username, this.model.password)
       .subscribe(
-        data => { this.router.navigate(['/']) },
+        data => { this.router.navigate(['/']); },
         error => {
           this.alertService.error(error);
           this.loading = false;
-       
       });
     }
   }
