@@ -11,7 +11,8 @@ import {clientsRouterConfig} from './clients/clients.routing';
 
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent, canActivate:[AuthGuard] },
+    { path: '', component: HomeComponent },
+    // { path: '', component: HomeComponent, canActivate:[AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'about', component: AboutComponent },
     ...clientsRouterConfig,
