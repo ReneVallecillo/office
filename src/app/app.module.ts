@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 import {ClientsComponent, ClientDetailComponent} from './clients/';
 import {AboutComponent} from './about/about.component';
 import { MaterialModule } from '@angular/material';
+import { RegisterComponent } from './register/register.component';
+import { AlertComponent} from './directives/alert.component'
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { MaterialModule } from '@angular/material';
     HomeComponent,
     AboutComponent,
     ClientsComponent,
-    ClientDetailComponent
+    ClientDetailComponent,
+    RegisterComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
