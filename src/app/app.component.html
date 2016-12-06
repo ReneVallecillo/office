@@ -1,11 +1,17 @@
 <div>
   <md-toolbar color="primary">
     <md-icon class="icon-20">create</md-icon>
-    Office
+    <span><a routerLink="home">Office</a></span>
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+    <div class="menu-list">
+    <span><a routerLink="about">About</a></span>
+    <span><a routerLink="clients">Clients</a></span>
+    <span><a routerLink="signup">Signup</a></span>
+    </div>
   </md-toolbar>
 </div>
 <div class="container">
-
   <alert></alert>
   <router-outlet></router-outlet>
 </div>
