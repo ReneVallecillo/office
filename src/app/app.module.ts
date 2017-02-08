@@ -23,6 +23,7 @@ import { AlertComponent} from './directives/alert.component'
 
 // Modules
 import { ProfileModule } from './profile/profile.module';
+import { RefundsModule } from './refunds/refunds.module';
 
 
 @NgModule({
@@ -43,6 +44,8 @@ import { ProfileModule } from './profile/profile.module';
     routing,
     MaterialModule.forRoot(),
     ProfileModule,
+    RefundsModule,
+
   ],
   providers: [
     AuthGuard,
