@@ -21,6 +21,9 @@ import { MaterialModule } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { AlertComponent} from './directives/alert.component'
 
+// Modules
+import { ProfileModule } from './profile/profile.module';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { AlertComponent} from './directives/alert.component'
     FormsModule,
     HttpModule,
     routing,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    ProfileModule,
   ],
   providers: [
     AuthGuard,
