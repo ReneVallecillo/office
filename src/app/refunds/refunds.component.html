@@ -1,3 +1,41 @@
-<p>
-  refunds works!
-</p>
+<div class="refund">
+  <div class="refund-form" *ngIf="add">
+    <md-card>
+      <md-card-title>
+        Agregar Rembolso
+      </md-card-title>
+      <md-card-content>
+        <form>
+          <p>
+          <md-input-container>
+            <input md-input placeholder="Valor">
+          </md-input-container>
+          <md-input-container>
+            <input md-input placeholder="Fecha">
+          </md-input-container>
+          <md-input-container>
+            <input md-input placeholder="Numero de Cheque">
+          </md-input-container>
+          <md-input-container >
+            <textarea md-input placeholder="Comentarios"
+            [rows]="4"></textarea>
+          </md-input-container>
+          </p>
+          <md-checkbox> Revisado?</md-checkbox>
+        </form>
+      </md-card-content>
+      <md-card-actions align="end">
+        <button md-raised-button color="accent"
+        (click)="save()">Agregar</button>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div class="refund-list">
+    <md-card>
+      <td-data-table [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">
+      </td-data-table>
+    <button md-fab (click)="add=!add">+</button>
+      
+    </md-card>
+  </div>
+</div>
