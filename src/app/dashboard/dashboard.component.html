@@ -1,0 +1,23 @@
+<md-sidenav-container class="dash-container">
+  <md-sidenav #sidenav class="dash-sidenav" opened="true">
+    <div class="dash-sidenav-header">
+      <div class="circle ">
+        <div class="letter ">
+          R
+        </div>
+      </div>
+      <div class="info">
+        <div class="name ">Rene Vallecillo</div>
+        <div class="email ">reneval23@patience.com</div>
+      </div>
+    </div>
+    <md-list>
+      <a md-list-item routerLink="/dashboard/refunds"> Rembolsos </a>
+      <a md-list-item routerLink="/dash/law"> Leyes </a>
+      <a md-list-item> Info </a>
+    </md-list>
+  </md-sidenav>
+  <div class="admin-sidenav-content ">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>

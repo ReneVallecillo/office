@@ -24,6 +24,7 @@ import { AlertComponent} from './directives/alert.component'
 // Modules
 import { ProfileModule } from './profile/profile.module';
 import { RefundsModule } from './refunds/refunds.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { RefundsModule } from './refunds/refunds.module';
     MaterialModule.forRoot(),
     ProfileModule,
     RefundsModule,
+    DashboardModule,
 
   ],
   providers: [
