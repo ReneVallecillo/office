@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ITdDataTableColumn } from '@covalent/core';
-const NUMBER_FORMAT: any = (v: { value: number }) => v.value;
-const DECIMAL_FORMAT: any = (v: { value: number }) => v.value.toFixed(2);
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ITdDataTableColumn, TdDataTableComponent } from '@covalent/core';
+import { RefundService } from './refunds.service';
+import { Refund } from '../models/';
 
 @Component({
   selector: 'app-refunds',
@@ -9,55 +10,71 @@ const DECIMAL_FORMAT: any = (v: { value: number }) => v.value.toFixed(2);
   styleUrls: ['./refunds.component.scss']
 })
 export class RefundsComponent implements OnInit {
-  add: boolean = false;
+  add = false;
+  data: Refund[];
+  tmp: Refund[];
+  refundForm: FormGroup;
+  refund: Refund;
+  @ViewChild('mydata') dataTable: TdDataTableComponent
 
   columns: ITdDataTableColumn[] = [
     { name: 'id', label: 'ID' },
-    { name: 'amount', label: 'Monto', numeric: true, format: v => v.toFixed(2) },
+    { name: 'amount', label: 'Monto', numeric: true },
     { name: 'date', label: 'Fecha Cierre' },
     { name: 'check_number', label: 'Numero de Cheque' },
   ];
 
-  data: any[] = [
-    {
-      'id': 1,
-      'amount': 1985.32,
-      'date': '02/07/2017',
-      'check_number': '0123456789'
-    },
-    {
-      'id': 2,
-      'amount': 1922.21,
-      'date': '02/01/2017',
-      'check_number': '0123456789'
-    },
-    {
-      'id': 3,
-      'amount': 1981.30,
-      'date': '02/11/2017',
-      'check_number': '0123456789'
-    },
-    {
-      'id': 4,
-      'amount': 1985.05,
-      'date': '02/22/2017',
-      'check_number': '0123456789'
-    },
-  ];
-
-
-
-  constructor() { }
+  constructor(
+    private refundService: RefundService,
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit() {
+    this.getRefunds();
+    this.refundForm = this.generateForm();
+  }
+
+  getRefunds() {
+    this.refundService.getRefunds()
+      .subscribe(refunds => this.data = refunds);
   }
 
   selectEvent(event) {
-
   }
 
-  save(){
+
+  onSubmit() {
+    let data: Refund = this.prepareSave();
+    this.refundService.addRefunds(data)
+      .subscribe(
+      refund => { this.data.push(refund); this.dataTable.refresh();},
+      error => console.log(error),
+    );
     this.add = !this.add;
+    
+  }
+
+  private generateForm(): FormGroup {
+    return this.fb.group({
+      amount: '',
+      date: '',
+      check_number: '',
+      comments: '',
+      reviewed: ''
+    });
+  }
+
+  private prepareSave(): Refund {
+    const formModel = this.refundForm.value;
+
+    const saveRefund: Refund = {
+      id: this.data.length + 1,
+      amount: formModel.amount as number,
+      date: formModel.date as string,
+      check_number: formModel.check_number
+    };
+
+    return saveRefund;
   }
 
 }
