@@ -1,0 +1,42 @@
+<div class="refund">
+  <div class="refund-form" *ngIf="add">
+    <md-card>
+      <md-card-title>
+        Agregar Rembolso
+      </md-card-title>
+      <md-card-content>
+        <form novalidate [formGroup]="refundForm">
+          
+          <p>
+          <md-input-container>
+            <input md-input placeholder="Valor" formControlName="amount" type="number">
+          </md-input-container>
+          <md-input-container>
+            <input md-input placeholder="Fecha" formControlName="date">
+          </md-input-container>
+          <md-input-container>
+            <input md-input placeholder="Numero de Cheque" formControlName="check_number">
+          </md-input-container>
+          <md-input-container >
+            <textarea md-input placeholder="Comentarios"
+            [rows]="4" formControlName="comments"></textarea>
+          </md-input-container>
+          </p>
+          <md-checkbox formControlName="reviewed" > Revisado?</md-checkbox>
+        </form>
+      </md-card-content>
+      <md-card-actions align="end">
+        <button md-raised-button color="accent"
+        (click)="onSubmit(refundForm)">Agregar</button>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div class="refund-list">
+    <md-card>
+      <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">
+      </td-data-table>
+    <button md-fab (click)="add=!add">+</button>
+      
+    </md-card>
+  </div>
+</div>

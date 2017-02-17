@@ -2,17 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { RefundsComponent } from '../refunds/refunds.component'
+import { refundsRoutes } from '../refunds/refunds-routing.module';
 
 const dashboardRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
         children: [
-            {
-                path: 'refunds',
-                component: RefundsComponent
-            }
+            ...refundsRoutes,
         ]
     },
 ];
