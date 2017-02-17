@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ITdDataTableColumn, TdDataTableComponent } from '@covalent/core';
 import { RefundService } from '../refunds.service';
 import { Refund } from '../../models/';
@@ -27,7 +28,9 @@ export class RefundListComponent implements OnInit {
 
   constructor(
     private refundService: RefundService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -38,6 +41,18 @@ export class RefundListComponent implements OnInit {
   getRefunds() {
     this.refundService.getRefunds()
       .subscribe(refunds => this.data = refunds);
+  }
+
+  selectEvent(event) {
+    if (event.selected) {
+      this.refund = event.row;
+    } else {
+      this.refund = null;
+    }
+  }
+
+  editRefund() {
+    this.router.navigate([this.refund.id], {relativeTo: this.route});
   }
 
   private generateForm(): FormGroup {

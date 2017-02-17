@@ -6,7 +6,6 @@
       </md-card-title>
       <md-card-content>
         <form novalidate [formGroup]="refundForm">
-          
           <p>
           <md-input-container>
             <input md-input placeholder="Valor" formControlName="amount" type="number">
@@ -33,6 +32,10 @@
   </div>
   <div class="refund-list">
     <md-card>
+      <div class="table-option">
+        <button md-button (click)="editRefund()">Editar</button>
+      </div>
+      <md-divider></md-divider>
       <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">
       </td-data-table>
     <button md-fab (click)="add=!add">+</button>

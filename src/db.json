@@ -30,5 +30,31 @@
       "date": "23/11/84",
       "check_number": "987654321"
     }
+  ],
+  "refunddetail":[
+    {
+      "id": 1,
+      "details": [
+        {
+          "id": 1,
+          "amount": 25,
+          "date": "23/11/84",
+          "reference":"Factura 225564"
+        },
+        {
+          "id": 2,
+          "amount": 45,
+          "date": "23/11/84",
+          "reference":"Factura 225564"
+        },
+        {
+          "id": 3,
+          "amount": 64,
+          "date": "23/11/84",
+          "reference":"Factura 225564"
+        }
+      ]
+    }
   ]
+
 }

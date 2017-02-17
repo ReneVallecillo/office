@@ -1,3 +1,14 @@
 <p>
   refund-detail works!
 </p>
+<div class="refund-detail-list">
+  <md-card>
+    <div class="table-option">
+      <button md-button (click)="editDetail()">Editar</button>
+    </div>
+    <md-divider></md-divider>
+    <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">
+    </td-data-table>
+    <button md-fab (click)="add=!add">+</button>
+  </md-card>
+</div>

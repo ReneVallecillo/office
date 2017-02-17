@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Refund } from '../models/';
+import { Refund, RefundDetail } from '../models/';
 
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RefundService {
-    private _serviceUrl = 'http://localhost:3000/refunds'; //api endpoint
+    private _serviceUrl = 'http://localhost:3000/'; //api endpoint
     constructor(private http: Http) { }
 
     getRefunds(): Observable<Refund[]> {
-        const url = this._serviceUrl;
+        const url = this._serviceUrl + 'refunds';
         return this.http.get(url)
             .map(this.extractData);
     }
@@ -28,6 +28,13 @@ export class RefundService {
         )
             .map(this.extractData)
             .catch(this.handleError);
+
+    }
+
+    getDetails(id: number): Observable<Refund> {
+        const url = this._serviceUrl + 'refunddetail/' + id;
+        return this.http.get(url)
+            .map(this.extractData);
 
     }
 
