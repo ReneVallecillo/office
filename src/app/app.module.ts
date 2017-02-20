@@ -25,7 +25,7 @@ import { AlertComponent} from './directives/alert.component'
 import { ProfileModule } from './profile/profile.module';
 import { RefundsModule } from './refunds/refunds.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-
+import { ReportsModule } from './reports/reports.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     ProfileModule,
     RefundsModule,
     DashboardModule,
+    ReportsModule,
 
   ],
   providers: [
