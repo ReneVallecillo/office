@@ -1,14 +1,55 @@
-<p>
-  refund-detail works!
-</p>
-<div class="refund-detail-list">
-  <md-card>
-    <div class="table-option">
-      <button md-button (click)="editDetail()">Editar</button>
-    </div>
-    <md-divider></md-divider>
-    <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">
-    </td-data-table>
-    <button md-fab (click)="add=!add">+</button>
-  </md-card>
-</div>
+<div class="detail">
+  <div class="detail-form" *ngIf="add">
+    <md-card>
+      <md-card-title>
+        Agregar Detalle Reembolso
+      </md-card-title>
+      <md-card-content>
+        <form novalidate [formGroup]="detailForm">
+          <p>
+            <md-input-container>
+              <input md-input placeholder="Valor" formControlName="amount" type="number">
+            </md-input-container>
+            <md-input-container>
+              <input md-input placeholder="Fecha" formControlName="date">
+            </md-input-container>
+            <md-input-container>
+              <input md-input placeholder="Proveedor" formControlName="provider">
+            </md-input-container>
+            <md-input-container>
+              <input md-input placeholder="Referencia" formControlName="reference">
+            </md-input-container>
+          </p>
+        </form>
+      </md-card-content>
+      <md-card-actions align="end">
+        <button md-raised-button color="accent" (click)="onSubmit(detailForm)">Agregar</button>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div class="refund-detail-list">
+    <md-card>
+      <div class="master">
+        <table td-data-table>
+          <th td-data-table-column>Reembolso</th>
+          <th td-data-table-column>Valor</th>
+          <th td-data-table-column>Fecha</th>
+          <th td-data-table-column>Cheque</th>
+          <tr td-data-table-row>
+            <td td-data-table-cell>{{(refund$ | async)?.id}}</td>
+            <td td-data-table-cell>{{(refund$ | async)?.amount}}</td>
+            <td td-data-table-cell>{{(refund$ | async)?.date}}</td>
+            <td td-data-table-cell>{{(refund$ | async)?.check_number}}</td>
+            
+          </tr>
+        </table>
+      </div>
+      <div class="table-option">
+        <button md-button (click)="editDetail()">Editar</button>
+      </div>
+      <md-divider></md-divider>
+      <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">
+      </td-data-table>
+      <button md-fab (click)="add=!add">+</button>
+    </md-card>
+  </div>

@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ITdDataTableColumn, TdDataTableComponent } from '@covalent/core';
-import { RefundDetail } from '../../models';
+import { RefundDetail, Refund } from '../../models';
 import { RefundService } from '../refunds.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 
 @Component({
@@ -18,6 +20,8 @@ export class RefundDetailComponent implements OnInit {
   tmp: RefundDetail[];
   detailForm: FormGroup;
   detail: RefundDetail;
+  refundSource = new Subject<Refund>();
+  refund$: Observable<Refund>;
   @ViewChild('mydata') dataTable: TdDataTableComponent;
 
   columns: ITdDataTableColumn[] = [
@@ -25,6 +29,7 @@ export class RefundDetailComponent implements OnInit {
     { name: 'amount', label: 'Monto', numeric: true },
     { name: 'date', label: 'Fecha Cierre' },
     { name: 'reference', label: 'Referencia(Cheque)' },
+    { name: 'provider', label: 'Proveedor' },
   ];
 
   constructor(
@@ -38,12 +43,57 @@ export class RefundDetailComponent implements OnInit {
       ((params: Params) => {
         this.getDetails(params['id']);
       });
+    this.detailForm = this.generateForm();
+  }
+
+  selectEvent(event) {
+    if (event.selected) {
+      this.detail = event.row;
+    } else {
+      this.detail = null;
+    }
   }
 
   getDetails(id: number) {
-    console.log(id);
     this.refundService.getDetails(id)
-      .subscribe(details => { this.data = details.details; console.log(details); });
+      .subscribe(details => { this.data = details.details; });
+    this.refund$ = this.refundService.getRefund(id);
   }
 
+  editDetail() {
+    this.detailForm.setValue({
+      amount: this.detail.amount,
+      date: this.detail.date,
+      provider: this.detail.provider,
+      reference: this.detail.reference,
+    });
+    this.add = !this.add;
+  }
+
+  save() {
+    this.refundService.addDetail(this.prepareSave());
+  }
+
+  private generateForm(): FormGroup {
+    return this.fb.group({
+      amount: '',
+      date: '',
+      provider: '',
+      reference: '',
+    });
+  }
+
+  private prepareSave(): RefundDetail {
+    const formModel = this.detailForm.value;
+
+    const saveDetail: RefundDetail = {
+      id: formModel.id ? formModel.id : formModel.length + 1,
+      amount: formModel.amount as number,
+      date: formModel.date as string,
+      provider: formModel.provider as string,
+      reference: formModel.reference as string,
+    };
+
+    return saveDetail;
+  }
 }

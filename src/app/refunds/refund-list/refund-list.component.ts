@@ -17,7 +17,7 @@ export class RefundListComponent implements OnInit {
   tmp: Refund[];
   refundForm: FormGroup;
   refund: Refund;
-  @ViewChild('mydata') dataTable: TdDataTableComponent
+  @ViewChild('mydata') dataTable: TdDataTableComponent;
 
   columns: ITdDataTableColumn[] = [
     { name: 'id', label: 'ID' },

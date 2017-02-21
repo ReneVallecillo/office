@@ -39,19 +39,22 @@
           "id": 1,
           "amount": 25,
           "date": "23/11/84",
-          "reference":"Factura 225564"
+          "reference":"Factura 225564",
+          "provider": "Sukarne"
         },
         {
           "id": 2,
           "amount": 45,
           "date": "23/11/84",
-          "reference":"Factura 225564"
+          "reference":"Factura 225564",
+          "provider": "Palí"
         },
         {
           "id": 3,
           "amount": 64,
           "date": "23/11/84",
-          "reference":"Factura 225564"
+          "reference":"Factura 225564",
+          "provider": "La Colonia"
         }
       ]
     }

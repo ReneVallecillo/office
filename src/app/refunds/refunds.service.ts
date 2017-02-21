@@ -17,12 +17,18 @@ export class RefundService {
             .map(this.extractData);
     }
 
+    getRefund(id: number): Observable<Refund> {
+        const url = this._serviceUrl + 'refunds/' + id;
+        return this.http.get(url)
+            .map(this.extractData);
+    }
+
     addRefunds(refund: Refund): Observable<Refund> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(
-            this._serviceUrl,
+            this._serviceUrl + 'refunds',
             JSON.stringify(refund),
             options
         )
@@ -31,12 +37,25 @@ export class RefundService {
 
     }
 
+    addDetail(detail: RefundDetail): Observable<RefundDetail> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(
+            this._serviceUrl + 'refunds',
+            JSON.stringify(detail),
+            options
+        ).map(this.extractData)
+            .catch(this.handleError);
+    }
+
     getDetails(id: number): Observable<Refund> {
         const url = this._serviceUrl + 'refunddetail/' + id;
         return this.http.get(url)
             .map(this.extractData);
 
     }
+
 
     private extractData(res: Response) {
         let body = res.json();

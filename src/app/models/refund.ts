@@ -9,6 +9,7 @@ export interface Refund {
 export interface RefundDetail {
     id: number;
     amount: number;
-    reference: number;
+    reference: string;
     date: string;
+    provider: string;
 }
