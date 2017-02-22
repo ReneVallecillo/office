@@ -37,7 +37,7 @@
           <th td-data-table-column>Cheque</th>
           <tr td-data-table-row>
             <td td-data-table-cell>{{(refund$ | async)?.id}}</td>
-            <td td-data-table-cell>{{(refund$ | async)?.amount}}</td>
+            <td td-data-table-cell>{{refundSum}}</td>
             <td td-data-table-cell>{{(refund$ | async)?.date}}</td>
             <td td-data-table-cell>{{(refund$ | async)?.check_number}}</td>
             

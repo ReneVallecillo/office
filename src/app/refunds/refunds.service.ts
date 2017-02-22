@@ -42,15 +42,15 @@ export class RefundService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(
-            this._serviceUrl + 'refunds',
+            this._serviceUrl + 'refunddetail',
             JSON.stringify(detail),
             options
         ).map(this.extractData)
             .catch(this.handleError);
     }
 
-    getDetails(id: number): Observable<Refund> {
-        const url = this._serviceUrl + 'refunddetail/' + id;
+    getDetails(id: number): Observable<RefundDetail[]> {
+        const url = this._serviceUrl + 'refunddetail?refund_id=' + id;
         return this.http.get(url)
             .map(this.extractData);
 

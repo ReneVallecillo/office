@@ -12,4 +12,5 @@ export interface RefundDetail {
     reference: string;
     date: string;
     provider: string;
+    refund_id: number;
 }

@@ -29,35 +29,54 @@
       "amount": 2311,
       "date": "23/11/84",
       "check_number": "987654321"
+    },
+    {
+      "id": 6,
+      "amount": 3345,
+      "date": "23/23/23",
+      "check_number": "12345"
     }
   ],
-  "refunddetail":[
+  "refunddetail": [
     {
       "id": 1,
-      "details": [
-        {
-          "id": 1,
-          "amount": 25,
-          "date": "23/11/84",
-          "reference":"Factura 225564",
-          "provider": "Sukarne"
-        },
-        {
-          "id": 2,
-          "amount": 45,
-          "date": "23/11/84",
-          "reference":"Factura 225564",
-          "provider": "Palí"
-        },
-        {
-          "id": 3,
-          "amount": 64,
-          "date": "23/11/84",
-          "reference":"Factura 225564",
-          "provider": "La Colonia"
-        }
-      ]
+      "amount": 25,
+      "date": "23/11/84",
+      "reference": "Factura 225564",
+      "provider": "Sukarne",
+      "refund_id": "1"
+    },
+    {
+      "id": 2,
+      "amount": 45,
+      "date": "23/11/84",
+      "reference": "Factura 225564",
+      "provider": "Palí",
+      "refund_id": "1"
+    },
+    {
+      "id": 3,
+      "amount": 64,
+      "date": "23/11/84",
+      "reference": "Factura 225564",
+      "provider": "La Colonia",
+      "refund_id": "1"
+    },
+    {
+      "id": 4,
+      "amount": 1984,
+      "date": "23/11/84",
+      "provider": "Plastico Moderno",
+      "reference": "2313123",
+      "refund_id": "1"
+    },
+    {
+      "id": 5,
+      "amount": 3500,
+      "date": "23/11/84",
+      "provider": "Ofiplaza",
+      "reference": "232324",
+      "refund_id": "1"
     }
   ]
-
 }

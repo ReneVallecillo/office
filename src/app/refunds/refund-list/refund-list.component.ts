@@ -5,6 +5,8 @@ import { ITdDataTableColumn, TdDataTableComponent } from '@covalent/core';
 import { RefundService } from '../refunds.service';
 import { Refund } from '../../models/';
 
+import 'rxjs/add/operator/mergeMap';
+
 @Component({
   selector: 'app-refund-list',
   templateUrl: './refund-list.component.html',
@@ -53,12 +55,24 @@ export class RefundListComponent implements OnInit {
   }
 
   editRefund() {
-    this.router.navigate([this.refund.id], {relativeTo: this.route});
+    this.router.navigate([this.refund.id], { relativeTo: this.route });
   }
 
-   toogleAdd() {
+  toogleAdd() {
     this.addSign = this.add ? '+' : '-';
     this.add = !this.add;
+  }
+
+  onSubmit() {
+    this.refund = this.prepareSave();
+    this.refundService.addRefunds(this.refund)
+      .flatMap((refund: Refund) => {
+        return this.refundService.getRefunds();
+      }).subscribe((refunds: Refund[]) => {
+        this.data = refunds;
+        this.dataTable.refresh();
+        this.toogleAdd();
+      });
   }
 
   private generateForm(): FormGroup {
