@@ -45,7 +45,7 @@
         </table>
       </div>
       <div class="table-option">
-        <button md-button (click)="editDetail()">Editar</button>
+        <button md-button (click)="editDetail()" [disabled]="detail==null">Editar</button>
       </div>
       <md-divider></md-divider>
       <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">

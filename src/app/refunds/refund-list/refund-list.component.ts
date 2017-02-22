@@ -18,7 +18,7 @@ export class RefundListComponent implements OnInit {
   data: Refund[];
   tmp: Refund[];
   refundForm: FormGroup;
-  refund: Refund;
+  refund: Refund = null;
   addSign = '+';
   @ViewChild('mydata') dataTable: TdDataTableComponent;
 

@@ -20,7 +20,7 @@ export class RefundDetailComponent implements OnInit {
   data: RefundDetail[];
   tmp: RefundDetail[];
   detailForm: FormGroup;
-  detail: RefundDetail;
+  detail: RefundDetail = null;
   addSign = '+';
   refund$: Observable<Refund>;
   refundId: number;
