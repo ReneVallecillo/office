@@ -84,8 +84,11 @@ export class RefundDetailComponent implements OnInit {
       provider: this.detail.provider,
       reference: this.detail.reference,
     });
-    this.add = !this.add;
+    if (!this.add) {
+      this.toogleAdd();
+    }
   }
+
 
   onSubmit() {
     this.detail = this.prepareSave();
@@ -107,6 +110,9 @@ export class RefundDetailComponent implements OnInit {
   toogleAdd() {
     this.addSign = this.add ? '+' : '-';
     this.add = !this.add;
+    if (this.detail == null) {
+      this.detailForm.reset();
+    }
   }
 
   calculateSum(data: RefundDetail[]): number {
