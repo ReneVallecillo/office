@@ -50,6 +50,6 @@
       <md-divider></md-divider>
       <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">
       </td-data-table>
-      <button md-fab (click)="add=!add">+</button>
+      <button md-fab (click)="toogleAdd()">{{addSign}}</button>
     </md-card>
   </div>

@@ -6,7 +6,6 @@ import { RefundService } from '../refunds.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 
 
 @Component({
@@ -20,7 +19,7 @@ export class RefundDetailComponent implements OnInit {
   tmp: RefundDetail[];
   detailForm: FormGroup;
   detail: RefundDetail;
-  refundSource = new Subject<Refund>();
+  addSign = '+';
   refund$: Observable<Refund>;
   @ViewChild('mydata') dataTable: TdDataTableComponent;
 
@@ -72,6 +71,11 @@ export class RefundDetailComponent implements OnInit {
 
   save() {
     this.refundService.addDetail(this.prepareSave());
+  }
+
+  toogleAdd() {
+    this.addSign = this.add ? '+' : '-';
+    this.add = !this.add;
   }
 
   private generateForm(): FormGroup {

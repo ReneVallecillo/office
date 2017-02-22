@@ -17,6 +17,7 @@ export class RefundListComponent implements OnInit {
   tmp: Refund[];
   refundForm: FormGroup;
   refund: Refund;
+  addSign = '+';
   @ViewChild('mydata') dataTable: TdDataTableComponent;
 
   columns: ITdDataTableColumn[] = [
@@ -53,6 +54,11 @@ export class RefundListComponent implements OnInit {
 
   editRefund() {
     this.router.navigate([this.refund.id], {relativeTo: this.route});
+  }
+
+   toogleAdd() {
+    this.addSign = this.add ? '+' : '-';
+    this.add = !this.add;
   }
 
   private generateForm(): FormGroup {
