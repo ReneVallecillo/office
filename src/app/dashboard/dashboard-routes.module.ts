@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 import { refundsRoutes } from '../refunds/refunds-routing.module';
+import { providersRoutes } from '../providers/providers-routing.module';
 
 const dashboardRoutes: Routes = [
     {
@@ -10,6 +11,7 @@ const dashboardRoutes: Routes = [
         component: DashboardComponent,
         children: [
             ...refundsRoutes,
+            ...providersRoutes,
         ]
     },
 ];

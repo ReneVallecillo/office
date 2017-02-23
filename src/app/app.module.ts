@@ -19,13 +19,14 @@ import {ClientsComponent, ClientDetailComponent} from './clients/';
 import {AboutComponent} from './about/about.component';
 import { MaterialModule } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
-import { AlertComponent} from './directives/alert.component'
+import { AlertComponent} from './directives/alert.component';
 
 // Modules
 import { ProfileModule } from './profile/profile.module';
 import { RefundsModule } from './refunds/refunds.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ReportsModule } from './reports/reports.module';
+import { ProvidersModule } from './providers/providers.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ReportsModule } from './reports/reports.module';
     RefundsModule,
     DashboardModule,
     ReportsModule,
+    ProvidersModule,
 
   ],
   providers: [
