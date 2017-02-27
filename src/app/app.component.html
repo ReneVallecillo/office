@@ -1,7 +1,7 @@
 <div>
   <md-toolbar color="primary">
     <md-icon class="icon-20">create</md-icon>
-    <span><a routerLink="home">Office</a></span>
+    <span><a routerLink="home" class="title">{{ title }}</a></span>
     <!-- This fills the remaining space of the current row -->
     <span class="fill-remaining-space"></span>
     <div class="menu-list">
@@ -15,21 +15,3 @@
   <alert></alert>
   <router-outlet></router-outlet>
 </div>
-<!--<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <div class="container">
-        <a class="navbar-brand">Office</a>
-        <ul class="nav navbar-nav" routerLinkActive="active">
-            <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="clients">Clients</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="signup">Signup</a></li>
-        </ul>
-    </div>
-</nav>-->
-<!-- main app container -->
-<!--<div class="jumbotron">
-    <div class="container">
-        <div class="col-sm-8 col-sm-offset-2">
-        </div>
-    </div>
-</div>-->
