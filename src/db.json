@@ -48,10 +48,10 @@
   "refunddetail": [
     {
       "id": 1,
-      "amount": 25,
+      "amount": 24,
       "date": "23/11/84",
-      "reference": "Factura 225564",
       "provider": "Sukarne",
+      "reference": "Factura 225564",
       "refund_id": "1"
     },
     {
@@ -88,11 +88,19 @@
     },
     {
       "id": 6,
-      "amount": 3232,
+      "amount": 200,
       "date": "23/11/84",
-      "provider": "tr5rttr5",
-      "reference": "trh5gthgrgyh",
-      "refund_id": "2"
+      "provider": "Samba",
+      "reference": "Pa ti",
+      "refund_id": "1"
+    },
+    {
+      "id": 7,
+      "amount": 250,
+      "date": "04/10/1985",
+      "provider": "viva",
+      "reference": "Picanha",
+      "refund_id": "1"
     }
   ]
 }

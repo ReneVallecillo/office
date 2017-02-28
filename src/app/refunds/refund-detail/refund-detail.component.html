@@ -23,7 +23,10 @@
         </form>
       </md-card-content>
       <md-card-actions align="end">
-        <button md-raised-button color="accent" (click)="onSubmit(detailForm)">Agregar</button>
+        <button *ngIf="detail" md-raised-button color="accent"
+        (click)="onSubmit(detailForm)">Editar</button>
+        <button *ngIf="!detail" md-raised-button color="accent"
+        (click)="onSubmit(detailForm)">Agregar</button>
       </md-card-actions>
     </md-card>
   </div>

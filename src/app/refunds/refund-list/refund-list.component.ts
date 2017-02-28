@@ -20,7 +20,6 @@ export class RefundListComponent implements OnInit {
   refundForm: FormGroup;
   refund: Refund = null;
   addSign = '+';
-  formAction = 'Agregar';
   @ViewChild('mydata') dataTable: TdDataTableComponent;
 
   columns: ITdDataTableColumn[] = [
@@ -56,7 +55,6 @@ export class RefundListComponent implements OnInit {
   }
 
   editRefund() {
-    this.formAction = 'Editar';
     this.refundForm.setValue({
       amount: this.refund.amount,
       date: this.refund.date,
@@ -112,7 +110,6 @@ export class RefundListComponent implements OnInit {
         this.data = refunds;
         this.dataTable.refresh();
         this.toogleAdd();
-        this.formAction = 'Agregar';
       });
   }
 
@@ -124,7 +121,6 @@ export class RefundListComponent implements OnInit {
         this.data = refunds;
         this.dataTable.refresh();
         this.toogleAdd();
-        this.formAction = 'Agregar';
       });
   }
 

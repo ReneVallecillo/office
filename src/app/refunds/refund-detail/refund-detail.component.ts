@@ -91,20 +91,50 @@ export class RefundDetailComponent implements OnInit {
 
 
   onSubmit() {
-    this.detail = this.prepareSave();
-    if (this.checkMax(this.detail.amount)) {
-      this.refundService.addDetail(this.detail)
-        .flatMap((detail: RefundDetail) => {
-          return this.refundService.getDetails(detail.refund_id);
-        }).subscribe((details: RefundDetail[]) => {
-          this.data = details;
-          this.refundSum = this.calculateSum(this.data);
-          this.dataTable.refresh();
-          this.toogleAdd();
-        });
+    let max = false;
+
+    if (this.detail) { //edit
+      this.detail = this.prepareSave(0);
+      if (this.checkMax(this.detail.amount)) {
+        this.updateDetail();
+      } else {
+        max = true;
+      }
     } else {
+      this.detail = this.prepareSave(1);
+      if (this.checkMax(this.detail.amount)) {
+        this.createDetail();
+      } else {
+        max = true;
+      }
+    }
+    if (max == true) {
       this.openSnackBar('El reembolso supera lo permitido: ' + this.max, 'Cerrar');
     }
+  }
+
+  private createDetail() {
+    this.refundService.createDetail(this.detail)
+      .flatMap((detail: RefundDetail) => {
+        return this.refundService.getDetails(detail.refund_id);
+      }).subscribe((details: RefundDetail[]) => {
+        this.data = details;
+        this.refundSum = this.calculateSum(this.data);
+        this.dataTable.refresh();
+        this.toogleAdd();
+      });
+  }
+
+  private updateDetail() {
+    this.refundService.updateDetail(this.detail)
+      .flatMap((detail: RefundDetail) => {
+        return this.refundService.getDetails(detail.refund_id);
+      }).subscribe((details: RefundDetail[]) => {
+        this.data = details;
+        this.refundSum = this.calculateSum(this.data);
+        this.dataTable.refresh();
+        this.toogleAdd();
+      });
   }
 
   toogleAdd() {
@@ -140,11 +170,11 @@ export class RefundDetailComponent implements OnInit {
     });
   }
 
-  private prepareSave(): RefundDetail {
+  private prepareSave(next: number): RefundDetail {
     const formModel = this.detailForm.value;
 
     const saveDetail: RefundDetail = {
-      id: formModel.id ? formModel.id : formModel.length + 1,
+      id: next > 0 ? formModel.length + next : this.detail.id,
       amount: formModel.amount as number,
       date: formModel.date as string,
       provider: formModel.provider as string,
