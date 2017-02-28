@@ -35,6 +35,14 @@
       "amount": 3345,
       "date": "23/23/23",
       "check_number": "12345"
+    },
+    {
+      "id": 7,
+      "amount": 2000,
+      "date": "23/11/84",
+      "check_number": "23118400",
+      "comments": "Sin Comentarios",
+      "reviewed": false
     }
   ],
   "refunddetail": [

@@ -20,6 +20,7 @@ export class RefundListComponent implements OnInit {
   refundForm: FormGroup;
   refund: Refund = null;
   addSign = '+';
+  formAction = 'Agregar';
   @ViewChild('mydata') dataTable: TdDataTableComponent;
 
   columns: ITdDataTableColumn[] = [
@@ -55,24 +56,42 @@ export class RefundListComponent implements OnInit {
   }
 
   editRefund() {
+    this.formAction = 'Editar';
+    this.refundForm.setValue({
+      amount: this.refund.amount,
+      date: this.refund.date,
+      check_number: this.refund.check_number,
+      comments: this.refund.comments ? this.refund.comments : '',
+      reviewed: this.refund.reviewed ? this.refund.reviewed : false,
+    });
+
+    if (!this.add) {
+      this.toogleAdd();
+    }
+  }
+
+  showDetail() {
     this.router.navigate([this.refund.id], { relativeTo: this.route });
   }
 
   toogleAdd() {
     this.addSign = this.add ? '+' : '-';
     this.add = !this.add;
+    if (this.refund == null) {
+      this.refundForm.reset();
+    }
   }
 
   onSubmit() {
-    this.refund = this.prepareSave();
-    this.refundService.addRefunds(this.refund)
-      .flatMap((refund: Refund) => {
-        return this.refundService.getRefunds();
-      }).subscribe((refunds: Refund[]) => {
-        this.data = refunds;
-        this.dataTable.refresh();
-        this.toogleAdd();
-      });
+    if (this.refund) { //edit
+      this.refund = this.prepareSave(0);
+      this.updateRefund();
+    } else {
+      this.refund = this.prepareSave(1);
+      this.createRefund();
+    }
+
+
   }
 
   private generateForm(): FormGroup {
@@ -85,14 +104,40 @@ export class RefundListComponent implements OnInit {
     });
   }
 
-  private prepareSave(): Refund {
+  private createRefund() {
+    this.refundService.addRefunds(this.refund)
+      .flatMap((refund: Refund) => {
+        return this.refundService.getRefunds();
+      }).subscribe((refunds: Refund[]) => {
+        this.data = refunds;
+        this.dataTable.refresh();
+        this.toogleAdd();
+        this.formAction = 'Agregar';
+      });
+  }
+
+  private updateRefund() {
+    this.refundService.updateRefunds(this.refund)
+      .flatMap((refund: Refund) => {
+        return this.refundService.getRefunds();
+      }).subscribe((refunds: Refund[]) => {
+        this.data = refunds;
+        this.dataTable.refresh();
+        this.toogleAdd();
+        this.formAction = 'Agregar';
+      });
+  }
+
+  private prepareSave(next: number): Refund {
     const formModel = this.refundForm.value;
 
     const saveRefund: Refund = {
-      id: this.data.length + 1,
+      id: next > 0 ? this.data.length + next : this.refund.id,
       amount: formModel.amount as number,
       date: formModel.date as string,
-      check_number: formModel.check_number
+      check_number: formModel.check_number,
+      comments: formModel.comments,
+      reviewed: formModel.reviewed,
     };
 
     return saveRefund;

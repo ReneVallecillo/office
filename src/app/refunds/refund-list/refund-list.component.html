@@ -25,7 +25,9 @@
         </form>
       </md-card-content>
       <md-card-actions align="end">
-        <button md-raised-button color="accent"
+        <button *ngIf="refund" md-raised-button color="accent"
+        (click)="onSubmit(refundForm)">Editar</button>
+        <button *ngIf="!refund" md-raised-button color="accent"
         (click)="onSubmit(refundForm)">Agregar</button>
       </md-card-actions>
     </md-card>
@@ -34,6 +36,7 @@
     <md-card>
       <div class="table-option">
         <button md-button (click)="editRefund()" [disabled]="refund==null">Editar</button>
+        <button md-button (click)="showDetail()" [disabled]="refund==null">Detalle</button>
       </div>
       <md-divider></md-divider>
       <td-data-table #mydata [data]="data" [columns]="columns" (rowSelect)="selectEvent($event)" selectable="true" [multiple]="false">

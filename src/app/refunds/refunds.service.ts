@@ -37,6 +37,20 @@ export class RefundService {
 
     }
 
+    updateRefunds(refund: Refund): Observable<Refund> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(
+            this._serviceUrl + 'refunds/' + refund.id,
+            JSON.stringify(refund),
+            options
+        )
+            .map(this.extractData)
+            .catch(this.handleError);
+
+    }
+
     addDetail(detail: RefundDetail): Observable<RefundDetail> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -48,6 +62,7 @@ export class RefundService {
         ).map(this.extractData)
             .catch(this.handleError);
     }
+
 
     getDetails(id: number): Observable<RefundDetail[]> {
         const url = this._serviceUrl + 'refunddetail?refund_id=' + id;

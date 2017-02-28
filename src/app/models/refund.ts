@@ -4,6 +4,8 @@ export interface Refund {
     date: string;
     check_number: string;
     details?: RefundDetail[];
+    comments: string;
+    reviewed: boolean;
 }
 
 export interface RefundDetail {
