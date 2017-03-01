@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToolbarService } from '../services/';
 
 @Component({
   selector: 'app-reports',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private toolbarService: ToolbarService) { }
 
   ngOnInit() {
+    this.toolbarService.hideToolbar();
   }
 
   printPage() {
